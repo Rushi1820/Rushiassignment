@@ -11,24 +11,14 @@ import crud
 import schemas
 from datetime import datetime, timedelta
 from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.chrome.options import Options
 
-# Set up Chrome options
-chrome_options = Options()
-chrome_options.add_argument("--headless")  # Ensure GUI is not required
-chrome_options.add_argument("--no-sandbox")  # Required for Docker
-chrome_options.add_argument("--disable-dev-shm-usage")  # Required for Docker
 
-# Set up the Remote WebDriver
-driver = webdriver.Remote(
-    command_executor="http://127.0.0.1:4444/wd/hub",
-    options=chrome_options
-)
 # Configure logging
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
 # Set up the WebDriver
+driver=webdriver.Chrome()
 
 def wait_for_element_to_be_stale(driver, element, timeout=20):
     try:
